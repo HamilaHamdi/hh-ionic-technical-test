@@ -1,0 +1,42 @@
+<!--
+  Generated template for the ListPostsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title align="center">la liste des articles </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+    <ion-content>
+
+      <ion-card *ngFor="let post of posts" >  <!--directive ngfor pour afficher dynamiquement les ionCard (component qui represente  un article)-->
+        <img src="https://placekitten.com/760/300"/>
+        <ion-card-content>
+
+          <ion-card-title align="center">
+          {{post["title"]}}  <!-- Databiding (String interpolation) pour afficher le titre d'un article en accedent  à l'atribut title de  l'objet post -->
+          </ion-card-title>
+
+          <p>
+            {{ (post["body"].length>200)? (post["body"] | slice:0:200)+'..':(post["body"]) }}
+          </p> <!-- String interpolation pour afficher tout le corps d'un article (ou bien son resumé si ce dernier depasse les 200 caracteres (à l'aide de Pipe) et ngif lite(?) -->
+
+        </ion-card-content>
+
+        <div align="center">
+          <button ion-button color="secondary" clear >Read More</button>
+        </div>
+
+
+      </ion-card>
+
+
+    </ion-content>
+
+
