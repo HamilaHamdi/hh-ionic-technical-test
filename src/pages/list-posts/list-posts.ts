@@ -9,6 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  */
 import {PostsApiService} from "../../services/postsapi.service";
 import {PostsApiList} from "../../models/postsapi-list.model";
+import {PostPage} from "../post/post";
 @IonicPage()
 @Component({
   selector: 'page-list-posts',
@@ -20,9 +21,14 @@ export class ListPostsPage {
     this.postsApiService.getPosts()
       .then(postsFetched =>{
         this.posts = postsFetched;
-        console.log(this.posts);
+        // console.log(this.posts);
 
       });
+  }
+
+  openPage(postId){
+
+    this.navCtrl.push('PostPage',{postid : postId} )
   }
 
   ionViewDidLoad() {
