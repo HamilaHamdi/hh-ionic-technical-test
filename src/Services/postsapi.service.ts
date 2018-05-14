@@ -6,7 +6,7 @@ import { Http }         from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-
+import {CommentsApiModel} from "../Models/commentsapi.model";
 import {PostsApiList} from '../models/postsapi-list.model';//import de Model
 @Injectable()
 export class PostsApiService {
@@ -36,4 +36,14 @@ export class PostsApiService {
   }
 
 
+//appel de webservice pour recuperer les commentaires d'un article
+  public GetCommentsByPostID(PostId): Promise<any> {
+
+    const url = this.baseUrl +'/' + PostId +'/comments';
+    return this.http.get(url)
+      .toPromise()
+      .then( response => response.json() as CommentsApiModel)
+      // .then(response =>console.log('reponse obtenue',response))
+      .catch(error => console.log('Une erreur est survenue ' + error))
+  }
 }

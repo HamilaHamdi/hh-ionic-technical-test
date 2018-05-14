@@ -16,13 +16,20 @@ import {PostsApiList} from "../../models/postsapi-list.model";
 })
 export class PostPage {
  idp = null;
- postItem : PostsApiList = new PostsApiList();  //declaration  du model qui va recuperer les données
+ postItem : PostsApiList = new PostsApiList();//declaration  du model qui va recuperer les données
+  commentsItem :any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private postService :PostsApiService ) {
     this.idp = this.navParams.get('postid');
     this.postService.getPostById(this.idp)
       .then(post => {
         this.postItem = post;
-        //console.log('this', this.postItem);
+      })
+//appel de la methode GetCommentsBypostID , elle prend en  parametre l'id de l'article. Sa reponse est affectée a l'objet commentsItem qui est utilisé a l'affichage de html.
+    this.postService.GetCommentsByPostID(this.idp)
+          .then(comments => {
+            this.commentsItem = comments;
+
+        console.log('this', this.commentsItem);
       })
   }
   ionViewDidLoad(){
